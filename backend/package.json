@@ -9,13 +9,16 @@
         "typescript": "4.5.2"
     },
     "dependencies": {
+        "@nestjs/common": "^9.2.1",
         "@nestjs/config": "^2.2.0",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",
+        "rxjs": "^7.8.0",
         "typeorm": "0.3.11"
     },
     "scripts": {
         "generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -p",
+        "runmigration": "ts-node ./node_modules/typeorm/cli.js migration:run",
         "start": "ts-node src/index.ts",
         "typeorm": "typeorm-ts-node-commonjs"
     }

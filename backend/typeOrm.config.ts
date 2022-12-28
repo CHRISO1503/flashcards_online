@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { ConfigService } from "@nestjs/config";
 import { config } from "dotenv";
+import { migrationName1671806248117 } from "./database/migrations/1671806248117-migrationName";
 
 config();
 
@@ -14,4 +15,5 @@ export default new DataSource({
     password: configService.get("POSTGRES_PASSWORD"),
     database: configService.get("POSTGRES_DB"),
     entities: [],
+    migrations: [migrationName1671806248117],
 });

@@ -1,7 +1,8 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-import { Deck } from "./entity/Deck"
-import { User } from "./entity/User"
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+import { Deck } from "./entity/Deck";
+import { User } from "./entity/User";
+import { migrationName1671806248117 } from "../database/migrations/1671806248117-migrationName";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -13,6 +14,6 @@ export const AppDataSource = new DataSource({
     synchronize: false,
     logging: false,
     entities: [User, Deck],
-    migrations: [],
+    migrations: [migrationName1671806248117],
     subscribers: [],
-})
+});

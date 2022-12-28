@@ -1,6 +1,8 @@
-import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
+import { smokeTest } from "../smoke-test";
+import { AppDataSource } from "./data-source";
 
-AppDataSource.initialize().then(async () => {
-
-}).catch(error => console.log(error))
+AppDataSource.initialize()
+    .then(async (connection) => {
+        await smokeTest(connection);
+    })
+    .catch((error) => console.log(error));
