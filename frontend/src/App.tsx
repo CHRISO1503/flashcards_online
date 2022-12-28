@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-export default function App() {
-    const [backendData, setBackendData] = useState([{}]);
-    useEffect(() => {
-        fetch("/api")
-            .then((response) => response.json())
-            .then((data) => {
-                setBackendData(data);
-            });
-    }, []);
-    // useEffect(() => {
-    //     fetch("http://localhost:5000/api").then((response) => console.log(response));
-    // }, []);
+interface testData {
+    message: string;
+}
 
-    return <div></div>;
+export default function App() {
+    const user = { userName: "bobb" };
+    const [testResponse, setTestResponse] = useState<testData | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch("/api/test");
+            console.log(res);
+            const data = await res.json();
+            setTestResponse(data);
+        };
+        fetchData();
+    }, []);
+    return (
+        <div>
+            {testResponse ? <p>{testResponse.message}</p> : <p>loading...</p>}
+        </div>
+    );
 }
