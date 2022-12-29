@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import Register from "../components/register";
+import "../styles/home.css";
+import { Link } from "react-router-dom";
 
 interface testData {
     message: string;
 }
 
 export default function App() {
-    const user = { userName: "bobb" };
     const [testResponse, setTestResponse] = useState<testData | null>(null);
 
     useEffect(() => {
@@ -18,9 +19,19 @@ export default function App() {
         };
         fetchData();
     }, []);
+
     return (
-        <div>
-            {testResponse ? <p>{testResponse.message}</p> : <p>loading...</p>}
-        </div>
+        <>
+            <div>
+                {testResponse ? (
+                    <p>{testResponse.message}</p>
+                ) : (
+                    <p>loading...</p>
+                )}
+            </div>
+            <Link to="/login">
+                log-in / register
+            </Link>
+        </>
     );
 }

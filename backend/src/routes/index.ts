@@ -4,7 +4,7 @@ import userService from "../service/user";
 const router = Router();
 router.post("/api/register", async (req, res) => {
     try {
-        await userService.register(req.body.userName);
+        await userService.register(req.body.username, req.body.password);
         res.sendStatus(201);
     } catch (err) {
         console.log(err);

@@ -4,6 +4,7 @@
     "description": "Awesome project developed with TypeORM.",
     "type": "commonjs",
     "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
         "@types/express": "^4.17.15",
         "@types/node": "^16.11.10",
         "ts-node": "10.7.0",
@@ -12,6 +13,7 @@
     "dependencies": {
         "@nestjs/common": "^9.2.1",
         "@nestjs/config": "^2.2.0",
+        "bcrypt": "^5.1.0",
         "express": "^4.18.2",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",

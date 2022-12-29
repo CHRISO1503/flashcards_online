@@ -9,6 +9,9 @@ export class User {
     @Column()
     userName: string;
 
+    @Column()
+    password: string;
+
     @OneToMany(() => Deck, (deck) => deck.user)
     decks: Deck[];
 }
