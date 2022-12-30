@@ -1,12 +1,14 @@
 :root {
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-family: system-ui;
     font-size: 16px;
     line-height: 24px;
-    font-weight: 400;
+    font-weight: 500;
+
+    --theme-blue: rgb(0, 132, 255);
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: white;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -67,4 +69,89 @@ button:focus-visible {
     button {
         background-color: #f9f9f9;
     }
+}
+
+h1.register {
+    font-size: 1.2em;
+    margin-top: 15px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+div.register {
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    flex-direction: column;
+    box-shadow: 5px 10px 50px grey;
+}
+
+form.register {
+    width: 77%;
+    size: 1.2em;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+label.register {
+    font-size: 1em;
+    margin-bottom: 25px;
+}
+
+input[type="text"].register,
+input[type="password"].register {
+    background-color: white;
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.4em;
+    color: black;
+    padding: 7px;
+}
+
+input[type="text"]:focus.register,
+input[type="password"]:focus.register {
+    border: 2px solid rgb(163, 163, 163);
+    outline: none;
+}
+
+input[type="submit"].register {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 1em;
+    justify-content: center;
+}
+
+input[type="submit"].register.login {
+    background-color: var(--theme-blue);
+}
+
+input[type="submit"].register.sign-up {
+    background-color: white;
+    color: var(--theme-blue);
+    border: 2px solid var(--theme-blue);
+}
+
+.login-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
 }

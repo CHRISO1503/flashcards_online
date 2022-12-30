@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import "../index.css";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -19,9 +20,10 @@ export default function Register() {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    localStorage.setItem("jwt", data.token);
-                    console.log("NAVIGATE");
-                    navigate("/");
+                    if (data.code == 201) {
+                        localStorage.setItem("jwt", data.token);
+                        navigate("/");
+                    }
                 })
                 .catch((error) => console.error(error));
         } else {
@@ -42,37 +44,47 @@ export default function Register() {
     }
 
     return (
-        <form onSubmit={(e) => handleRegister(e, true)}>
-            <label>
-                username:
-                <br />
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Password:
-                <br />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </label>
-            <br />
-            <input
-                type="submit"
-                value={"Login"}
-                onClick={(e) => handleRegister(e, true)}
-            />
-            <input
-                type="submit"
-                value={"Register"}
-                onClick={(e) => handleRegister(e, false)}
-            />
-        </form>
+        <div className="register">
+            <h1 className="register">Log in or register your account</h1>
+            <form
+                onSubmit={(e) => handleRegister(e, true)}
+                className="register"
+            >
+                <label className="register">
+                    Username
+                    <br />
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        className="register"
+                    />
+                </label>
+                <label className="register">
+                    Password
+                    <br />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="register"
+                    />
+                </label>
+                <div style={{ display: "flex" }}>
+                    <input
+                        type="submit"
+                        value={"Register"}
+                        onClick={(e) => handleRegister(e, false)}
+                        className="register sign-up"
+                    />
+                    <input
+                        type="submit"
+                        value={"Login"}
+                        onClick={(e) => handleRegister(e, true)}
+                        className="register login"
+                    />
+                </div>
+            </form>
+        </div>
     );
 }

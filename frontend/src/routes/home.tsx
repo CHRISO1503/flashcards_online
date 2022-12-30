@@ -27,7 +27,7 @@ export default function App() {
                     <p>loading...</p>
                 )}
             </div>
-            <Link to="/login">
+            <Link to="/login" onClick={() => localStorage.setItem("jwt", "")}>
                 log-in / register
             </Link>
         </>

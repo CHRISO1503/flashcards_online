@@ -23,6 +23,9 @@ class UserService {
     async login(userName: string, password: string) {
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.findOne({ where: { userName: userName } });
+        if (user == null) {
+            return { code: 401, message: "No such user exists", token: null };
+        }
         if (await bcrypt.compare(password, user.password)) {
             const token = jwt.sign(
                 { id: user.id, username: user.userName },
@@ -30,7 +33,7 @@ class UserService {
             );
             return { code: 200, message: "Auth successful", token: token };
         } else {
-            return { code: 401, message: "Auth fail", token: null };
+            return { code: 401, message: "Incorrect password", token: null };
         }
     }
 }
