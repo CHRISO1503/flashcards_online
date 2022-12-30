@@ -1,13 +1,14 @@
-import { useState, useEffect, KeyboardEvent, FormEvent } from "react";
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     async function handleRegister(e: FormEvent, isRegistered: boolean) {
         e.preventDefault();
         if (isRegistered) {
-            console.log("LOGGINGIN");
             await fetch("/api/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -17,10 +18,13 @@ export default function Register() {
                 }),
             })
                 .then((response) => response.json())
-                .then((data) => console.log(data))
+                .then((data) => {
+                    localStorage.setItem("jwt", data.token);
+                    console.log("NAVIGATE");
+                    navigate("/");
+                })
                 .catch((error) => console.error(error));
         } else {
-            console.log("REGISTERING");
             await fetch("/api/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -33,7 +37,6 @@ export default function Register() {
                 .then((data) => console.log(data))
                 .catch((error) => console.error(error));
         }
-
         setUsername("");
         setPassword("");
     }

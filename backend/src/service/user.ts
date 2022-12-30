@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 import bcrypt = require("bcrypt");
+import jwt = require("jsonwebtoken");
 
 const saltRounds = 10;
 
@@ -23,9 +24,13 @@ class UserService {
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.findOne({ where: { userName: userName } });
         if (await bcrypt.compare(password, user.password)) {
-            return { code: 200, message: "Auth successful" };
+            const token = jwt.sign(
+                { id: user.id, username: user.userName },
+                "secret"
+            );
+            return { code: 200, message: "Auth successful", token: token };
         } else {
-            return { code: 401, message: "Auth fail" };
+            return { code: 401, message: "Auth fail", token: null };
         }
     }
 }

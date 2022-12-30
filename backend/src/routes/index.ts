@@ -22,7 +22,10 @@ router.post("/api/login", async (req, res) => {
             req.body.username,
             req.body.password
         );
-        res.status(response.code).json(response.message);
+        res.status(response.code).send({
+            message: response.message,
+            token: response.token,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json("Something went wrong");

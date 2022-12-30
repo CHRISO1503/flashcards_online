@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Register from "../components/register";
-import "../styles/home.css";
 import { Link } from "react-router-dom";
 
 interface testData {
