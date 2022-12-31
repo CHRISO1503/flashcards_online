@@ -4,7 +4,8 @@
     line-height: 24px;
     font-weight: 500;
 
-    --theme-blue: rgb(0, 132, 255);
+    --theme-blue: rgb(0, 57, 107);
+    --theme-blue-highlight: rgb(0, 21, 49);
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
@@ -48,10 +49,6 @@ button {
     font-family: inherit;
     background-color: #1a1a1a;
     cursor: pointer;
-    transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
@@ -74,13 +71,14 @@ button:focus-visible {
 h1.register {
     font-size: 1.2em;
     margin-top: 15px;
-    margin-bottom: 0;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
 }
 
 div.register {
     color: black;
+    border: 2px solid var(--theme-blue);
     background-color: white;
     display: flex;
     justify-content: center;
@@ -88,7 +86,6 @@ div.register {
     height: 300px;
     border-radius: 10px;
     flex-direction: column;
-    box-shadow: 5px 10px 50px grey;
 }
 
 form.register {
@@ -97,6 +94,7 @@ form.register {
     margin: auto;
     display: flex;
     flex-direction: column;
+    height: 250px;
 }
 
 label.register {
@@ -135,6 +133,17 @@ input[type="submit"].register {
     margin-right: 10%;
     font-size: 1em;
     justify-content: center;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover.register.login {
+    background-color: var(--theme-blue-highlight);
+}
+
+input[type="submit"]:hover.register.sign-up {
+    background-color: var(--theme-blue-highlight);
+    color: white;
+    border: none;
 }
 
 input[type="submit"].register.login {
@@ -148,10 +157,58 @@ input[type="submit"].register.sign-up {
 }
 
 .login-popup {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 0vh;
     flex-direction: column;
+}
+
+div.top-bar {
+    background-color: var(--theme-blue);
+    color: black;
+    display: flex;
+    width: 100%;
+    height: 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+button.account {
+    background-color: var(--theme-blue);
+    display: flex;
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100px;
+    color: white;
+    justify-content: center;
+    font-size: 1em;
+    border-radius: 0;
+    position: absolute;
+    right: 0;
+}
+
+button:focus.account {
+    outline: none;
+}
+
+button:hover.account {
+    background-color: var(--theme-blue-highlight);
+}
+
+h1.top-bar {
+    color: white;
+    font-size: 2em;
+    display: flex;
+    margin: auto;
+    vertical-align: middle;
+}
+
+div.blur-content {
+    filter: blur(2px);
 }

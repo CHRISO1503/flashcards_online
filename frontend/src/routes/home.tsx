@@ -1,35 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, createContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-interface testData {
-    message: string;
-}
+import LoginPopup from "../components/loginPopup";
+import TopBar from "../components/topBar";
 
 export default function App() {
-    const [testResponse, setTestResponse] = useState<testData | null>(null);
+    const [loggingIn, setLoggingIn] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("/api/test");
-            console.log(res);
-            const data = await res.json();
-            setTestResponse(data);
-        };
-        fetchData();
-    }, []);
+    function ShowLogin() {
+        if (loggingIn) {
+            return (
+                <div className="login-popup">
+                    <LoginPopup loggingIn={loggingIn} setLoginState={setLoggingIn} />
+                </div>
+            );
+        } else return <></>;
+    }
 
     return (
         <>
-            <div>
-                {testResponse ? (
-                    <p>{testResponse.message}</p>
-                ) : (
-                    <p>loading...</p>
-                )}
+            <TopBar />
+            {ShowLogin()}
+            <div className={loggingIn ? "blur-content" : ""}>
+                <Link
+                    to="/login"
+                    onClick={() => localStorage.setItem("jwt", "")}
+                >
+                    Log-in / Register
+                </Link>
             </div>
-            <Link to="/login" onClick={() => localStorage.setItem("jwt", "")}>
-                log-in / register
-            </Link>
         </>
     );
 }

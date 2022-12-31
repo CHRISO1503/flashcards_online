@@ -1,15 +1,22 @@
-import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, FormEvent, useContext, SetStateAction } from "react";
 import "../index.css";
+// import { loggingInContext } from "../routes/home";
 
-export default function Register() {
-    const navigate = useNavigate();
+export default function LoginPopup({
+    loggingIn,
+    setLoginState,
+}: {
+    loggingIn: boolean;
+    setLoginState: (value: boolean) => void;
+}) {
+    // const setLoginState = useContext(loggingInContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     async function handleRegister(e: FormEvent, isRegistered: boolean) {
         e.preventDefault();
         if (isRegistered) {
+            let status200 = false;
             await fetch("/api/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -18,11 +25,17 @@ export default function Register() {
                     password: password,
                 }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.status == 200) {
+                        status200 = true;
+                    }
+                    return response.json();
+                })
                 .then((data) => {
-                    if (data.code == 201) {
+                    if (status200) {
                         localStorage.setItem("jwt", data.token);
-                        navigate("/");
+                        console.log("settingLoginState");
+                        setLoginState(false);
                     }
                 })
                 .catch((error) => console.error(error));

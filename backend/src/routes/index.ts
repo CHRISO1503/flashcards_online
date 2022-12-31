@@ -22,7 +22,7 @@ router.post("/api/login", async (req, res) => {
             req.body.username,
             req.body.password
         );
-        res.status(response.code).send({
+        res.status(response.code).json({
             message: response.message,
             token: response.token,
         });

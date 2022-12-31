@@ -7,6 +7,7 @@ const saltRounds = 10;
 
 class UserService {
     async register(userName: string, password: string) {
+        userName = userName.toUpperCase();
         const userRepo = AppDataSource.getRepository(User);
         if (
             (await userRepo.findOne({ where: { userName: userName } })) != null
@@ -21,6 +22,7 @@ class UserService {
     }
 
     async login(userName: string, password: string) {
+        userName = userName.toUpperCase();
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.findOne({ where: { userName: userName } });
         if (user == null) {
