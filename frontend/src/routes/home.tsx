@@ -5,12 +5,16 @@ import TopBar from "../components/topBar";
 
 export default function App() {
     const [loggingIn, setLoggingIn] = useState(true);
+    const [currentUser, setCurrentUser] = useState("guest");
 
     function ShowLogin() {
         if (loggingIn) {
             return (
                 <div className="login-popup">
-                    <LoginPopup loggingIn={loggingIn} setLoginState={setLoggingIn} />
+                    <LoginPopup
+                        setLoginState={setLoggingIn}
+                        setCurrentUser={setCurrentUser}
+                    />
                 </div>
             );
         } else return <></>;
@@ -18,7 +22,11 @@ export default function App() {
 
     return (
         <>
-            <TopBar />
+            <TopBar
+                setLoginState={setLoggingIn}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+            />
             {ShowLogin()}
             <div className={loggingIn ? "blur-content" : ""}>
                 <Link

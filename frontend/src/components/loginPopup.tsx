@@ -3,18 +3,40 @@ import "../index.css";
 // import { loggingInContext } from "../routes/home";
 
 export default function LoginPopup({
-    loggingIn,
     setLoginState,
+    setCurrentUser,
 }: {
-    loggingIn: boolean;
     setLoginState: (value: boolean) => void;
+    setCurrentUser: (value: string) => void;
 }) {
     // const setLoginState = useContext(loggingInContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const userErrorMessages = [
+        "Enter username and password to register or login",
+        "User does not exist",
+        "Password and username do not match",
+        "Account registered",
+        "Username taken",
+        "Something went wrong",
+        "Invalid username",
+        "Please enter a password",
+        "Registration successful",
+    ];
+    const [userErrorMessage, setUserErrorMessage] = useState(
+        userErrorMessages[0]
+    );
 
     async function handleRegister(e: FormEvent, isRegistered: boolean) {
         e.preventDefault();
+        if (username.indexOf(" ") != -1 || username == "") {
+            setUserErrorMessage(userErrorMessages[6]);
+            return;
+        }
+        if (password.indexOf(" ") != -1 || password == "") {
+            setUserErrorMessage(userErrorMessages[7]);
+            return;
+        }
         if (isRegistered) {
             let status200 = false;
             await fetch("/api/login", {
@@ -34,8 +56,14 @@ export default function LoginPopup({
                 .then((data) => {
                     if (status200) {
                         localStorage.setItem("jwt", data.token);
-                        console.log("settingLoginState");
+                        setCurrentUser(username);
                         setLoginState(false);
+                    } else if (data.message == "No such user exists") {
+                        setUserErrorMessage(userErrorMessages[1]);
+                    } else if (data.message == "Incorrect password") {
+                        setUserErrorMessage(userErrorMessages[2]);
+                    } else {
+                        setUserErrorMessage(userErrorMessages[5]);
                     }
                 })
                 .catch((error) => console.error(error));
@@ -48,11 +76,16 @@ export default function LoginPopup({
                     password: password,
                 }),
             })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
+                .then((response) => {
+                    if (response.status == 201) {
+                        setUserErrorMessage(userErrorMessages[8]);
+                    } else if (response.status == 409) {
+                        setUserErrorMessage(userErrorMessages[4]);
+                    }
+                    return response.json();
+                })
                 .catch((error) => console.error(error));
         }
-        setUsername("");
         setPassword("");
     }
 
@@ -98,6 +131,7 @@ export default function LoginPopup({
                     />
                 </div>
             </form>
+            <p className="register">{userErrorMessage}</p>
         </div>
     );
 }

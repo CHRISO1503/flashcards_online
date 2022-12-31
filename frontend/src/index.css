@@ -76,6 +76,13 @@ h1.register {
     justify-content: center;
 }
 
+p.register {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 div.register {
     color: black;
     border: 2px solid var(--theme-blue);
@@ -83,7 +90,7 @@ div.register {
     display: flex;
     justify-content: center;
     width: 400px;
-    height: 300px;
+    height: 350px;
     border-radius: 10px;
     flex-direction: column;
 }
@@ -178,7 +185,15 @@ div.top-bar {
     text-align: center;
 }
 
-button.account {
+h1.top-bar {
+    color: white;
+    font-size: 2em;
+    display: flex;
+    margin: auto;
+    vertical-align: middle;
+}
+
+button.top-bar {
     background-color: var(--theme-blue);
     display: flex;
     height: 100%;
@@ -193,20 +208,25 @@ button.account {
     right: 0;
 }
 
-button:focus.account {
+p.top-bar {
+    display: flex;
+    margin-right: 0;
+    margin-left: 15px;
+    color: white;
+    justify-content: center;
+    font-size: 1em;
+    border-radius: 0;
+    position: absolute;
+    left: 0;
+    margin-top: 12px;
+}
+
+button:focus.top-bar {
     outline: none;
 }
 
-button:hover.account {
+button:hover.top-bar {
     background-color: var(--theme-blue-highlight);
-}
-
-h1.top-bar {
-    color: white;
-    font-size: 2em;
-    display: flex;
-    margin: auto;
-    vertical-align: middle;
 }
 
 div.blur-content {
