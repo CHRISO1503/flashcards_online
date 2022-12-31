@@ -1,6 +1,5 @@
-import { useState, FormEvent, useContext, SetStateAction } from "react";
+import { useState, FormEvent } from "react";
 import "../index.css";
-// import { loggingInContext } from "../routes/home";
 
 export default function LoginPopup({
     setLoginState,
@@ -9,7 +8,6 @@ export default function LoginPopup({
     setLoginState: (value: boolean) => void;
     setCurrentUser: (value: string) => void;
 }) {
-    // const setLoginState = useContext(loggingInContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const userErrorMessages = [
@@ -90,7 +88,7 @@ export default function LoginPopup({
     }
 
     return (
-        <div className="register">
+        <div className="popup">
             <h1 className="register">Log in or register your account</h1>
             <form
                 onSubmit={(e) => handleRegister(e, true)}

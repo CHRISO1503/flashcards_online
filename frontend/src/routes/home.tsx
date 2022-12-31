@@ -1,13 +1,21 @@
-import { useState, createContext, useEffect } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoginPopup from "../components/loginPopup";
 import TopBar from "../components/topBar";
+import CardsMenu from "../components/cardsMenu";
 
 export default function App() {
-    const [loggingIn, setLoggingIn] = useState(true);
-    const [currentUser, setCurrentUser] = useState("guest");
+    //TEMPORARILY SET DEFAULT STATE TO FALSE
+    const [loggingIn, setLoggingIn] = useState(false);
+    const [blurContent, setBlurContent] = useState(false);
+    const [currentUser, setCurrentUser] = useState("Guest");
 
-    function ShowLogin() {
+    useEffect(() => {
+        setBlurContent(loggingIn);
+    }, [loggingIn]);
+
+    function ShowLoginPopup() {
         if (loggingIn) {
             return (
                 <div className="login-popup">
@@ -27,15 +35,12 @@ export default function App() {
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
             />
-            {ShowLogin()}
-            <div className={loggingIn ? "blur-content" : ""}>
-                <Link
-                    to="/login"
-                    onClick={() => localStorage.setItem("jwt", "")}
-                >
-                    Log-in / Register
-                </Link>
+            <div className={blurContent ? "blur-content" : ""}>
+                <div className="cards-menu-container">
+                    <CardsMenu disableContent={blurContent}/>
+                </div>
             </div>
+            {ShowLoginPopup()}
         </>
     );
 }
