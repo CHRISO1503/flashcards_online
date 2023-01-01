@@ -3,10 +3,8 @@ import "../index.css";
 
 export default function LoginPopup({
     setLoginState,
-    setCurrentUser,
 }: {
     setLoginState: (value: boolean) => void;
-    setCurrentUser: (value: string) => void;
 }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -54,7 +52,6 @@ export default function LoginPopup({
                 .then((data) => {
                     if (status200) {
                         localStorage.setItem("jwt", data.token);
-                        setCurrentUser(username);
                         setLoginState(false);
                     } else if (data.message == "No such user exists") {
                         setUserErrorMessage(userErrorMessages[1]);
@@ -114,18 +111,18 @@ export default function LoginPopup({
                         className="register"
                     />
                 </label>
-                <div style={{ display: "flex" }}>
-                    <input
-                        type="submit"
-                        value={"Register"}
-                        onClick={(e) => handleRegister(e, false)}
-                        className="register sign-up"
-                    />
+                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                     <input
                         type="submit"
                         value={"Login"}
                         onClick={(e) => handleRegister(e, true)}
                         className="register login"
+                    />
+                    <input
+                        type="submit"
+                        value={"Register"}
+                        onClick={(e) => handleRegister(e, false)}
+                        className="register sign-up"
                     />
                 </div>
             </form>

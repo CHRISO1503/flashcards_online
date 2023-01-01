@@ -1,22 +1,27 @@
+import { useNavigate, useLocation } from "react-router-dom";
+
 export default function TopBar({
-    setLoginState,
-    currentUser,
-    setCurrentUser,
+    parentState = 0,
+    updateParent = () => null,
 }: {
-    setLoginState: (value: boolean) => void;
-    currentUser: string;
-    setCurrentUser: (value: string) => void;
+    parentState?: number;
+    updateParent?: (value: number) => void;
 }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     return (
         <div className="top-bar">
-            <p className="top-bar">Logged in as {currentUser}</p>
             <h1 className="top-bar">Flashcards Online</h1>
             <button
                 className="top-bar"
                 onClick={() => {
-                    setCurrentUser("Guest");
-                    setLoginState(true);
                     localStorage.setItem("jwt", "");
+                    if (location.pathname != "/") {
+                        navigate("/");
+                    } else {
+                        updateParent(parentState + 1);
+                    }
                 }}
             >
                 Log out
