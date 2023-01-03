@@ -68,7 +68,7 @@ button:focus-visible {
     }
 }
 
-h1.register {
+h1.form-style {
     font-size: 1.2em;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -76,7 +76,7 @@ h1.register {
     justify-content: center;
 }
 
-p.register {
+p.form-style {
     margin-top: 15px;
     margin-bottom: 20px;
     display: flex;
@@ -95,7 +95,7 @@ div.popup {
     flex-direction: column;
 }
 
-form.register {
+form.form-style {
     width: 77%;
     size: 1.2em;
     margin: auto;
@@ -104,13 +104,13 @@ form.register {
     height: 250px;
 }
 
-label.register {
+label.form-style {
     font-size: 1em;
     margin-bottom: 25px;
 }
 
-input[type="text"].register,
-input[type="password"].register {
+input[type="text"].form-style,
+input[type="password"].form-style {
     background-color: white;
     border: 2px solid lightgrey;
     border-radius: 10px;
@@ -123,13 +123,13 @@ input[type="password"].register {
     padding: 7px;
 }
 
-input[type="text"]:focus.register,
-input[type="password"]:focus.register {
+input[type="text"]:focus.form-style,
+input[type="password"]:focus.form-style {
     border: 2px solid rgb(163, 163, 163);
     outline: none;
 }
 
-input[type="submit"].register {
+input[type="submit"].form-style {
     width: 100px;
     height: 40px;
     border-radius: 10px;
@@ -143,21 +143,21 @@ input[type="submit"].register {
     cursor: pointer;
 }
 
-input[type="submit"]:hover.register.login {
+input[type="submit"]:hover.form-style.login {
     background-color: var(--theme-color-highlight);
 }
 
-input[type="submit"]:hover.register.sign-up {
+input[type="submit"]:hover.form-style.sign-up {
     background-color: var(--theme-color-highlight);
     color: white;
     border: none;
 }
 
-input[type="submit"].register.login {
+input[type="submit"].form-style.login {
     background-color: var(--theme-color);
 }
 
-input[type="submit"].register.sign-up {
+input[type="submit"].form-style.sign-up {
     background-color: white;
     color: var(--theme-color);
     border: 2px solid var(--theme-color);
@@ -169,7 +169,7 @@ input[type="submit"].register.sign-up {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 0vh;
+    height: 100vh;
     flex-direction: column;
 }
 
@@ -187,10 +187,11 @@ div.top-bar {
 
 h1.top-bar {
     color: white;
+    width: 100vw;
     font-size: 2em;
-    display: flex;
     margin: auto;
-    vertical-align: middle;
+    position: fixed;
+    margin-top: 4px;
 }
 
 button.top-bar {
@@ -283,4 +284,12 @@ p.card-menu-icon {
     width: 100vw;
     height: 0vh;
     flex-direction: column;
+}
+
+.page-heading {
+    color: black;
+    text-align: center;
+    width: 100vw;
+    margin-top: 100px;
+    font-size: 4em;
 }

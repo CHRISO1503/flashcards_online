@@ -52,6 +52,7 @@ export default function LoginPopup({
                 .then((data) => {
                     if (status200) {
                         localStorage.setItem("jwt", data.token);
+                        localStorage.setItem("currentUser", username);
                         setLoginState(false);
                     } else if (data.message == "No such user exists") {
                         setUserErrorMessage(userErrorMessages[1]);
@@ -86,29 +87,29 @@ export default function LoginPopup({
 
     return (
         <div className="popup">
-            <h1 className="register">Log in or register your account</h1>
+            <h1 className="form-style">Log in or register your account</h1>
             <form
                 onSubmit={(e) => handleRegister(e, true)}
-                className="register"
+                className="form-style"
             >
-                <label className="register">
+                <label className="form-style">
                     Username
                     <br />
                     <input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="register"
+                        className="form-style"
                     />
                 </label>
-                <label className="register">
+                <label className="form-style">
                     Password
                     <br />
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="register"
+                        className="form-style"
                     />
                 </label>
                 <div style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -116,17 +117,17 @@ export default function LoginPopup({
                         type="submit"
                         value={"Login"}
                         onClick={(e) => handleRegister(e, true)}
-                        className="register login"
+                        className="form-style login"
                     />
                     <input
                         type="submit"
                         value={"Register"}
                         onClick={(e) => handleRegister(e, false)}
-                        className="register sign-up"
+                        className="form-style sign-up"
                     />
                 </div>
             </form>
-            <p className="register">{userErrorMessage}</p>
+            <p className="form-style">{userErrorMessage}</p>
         </div>
     );
 }

@@ -26,7 +26,7 @@ export default function App() {
     function showLoginPopup() {
         if (loggingIn) {
             return (
-                <div className="login-popup">
+                <div className="login-popup" style={{ position: "absolute", display: "flex", top: "0px" }}>
                     <LoginPopup setLoginState={setLoggingIn} />
                 </div>
             );
@@ -41,7 +41,7 @@ export default function App() {
                 </div>
             </div>
             {showLoginPopup()}
-            <TopBar parentState={state} updateParent={updateState} />
+            <TopBar loginState={loggingIn} parentState={state} updateParent={updateState} />
         </>
     );
 }
