@@ -14,7 +14,6 @@ export default function App() {
             localStorage.getItem("jwt") == "" ||
             localStorage.getItem("jwt") == null
         ) {
-            console.log("LOGGED OUT")
             setLoggingIn(true);
         }
     });
@@ -26,7 +25,17 @@ export default function App() {
     function showLoginPopup() {
         if (loggingIn) {
             return (
-                <div className="login-popup" style={{ position: "absolute", display: "flex", top: "0px" }}>
+                <div
+                    className="general-popup"
+                    style={{
+                        position: "absolute",
+                        display: "flex",
+                        top: "0px",
+                        width: "100vw",
+                        height: "100vh",
+                        margin: "0",
+                    }}
+                >
                     <LoginPopup setLoginState={setLoggingIn} />
                 </div>
             );
@@ -41,7 +50,11 @@ export default function App() {
                 </div>
             </div>
             {showLoginPopup()}
-            <TopBar loginState={loggingIn} parentState={state} updateParent={updateState} />
+            <TopBar
+                loginState={loggingIn}
+                parentState={state}
+                updateParent={updateState}
+            />
         </>
     );
 }

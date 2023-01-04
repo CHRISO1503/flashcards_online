@@ -6,7 +6,7 @@ export default function CardsMenu({
     disableContent: boolean;
 }) {
     return (
-        <div className="card-menu">
+        <div style={{ display: "flex" }}>
             <CardsMenuHomeButton
                 disableContent={disableContent}
                 icon={"o"}

@@ -163,14 +163,12 @@ input[type="submit"].form-style.sign-up {
     border: 2px solid var(--theme-color);
 }
 
-.login-popup {
-    position: fixed;
+.general-popup {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
     flex-direction: column;
+    margin: 10px;
 }
 
 div.top-bar {
@@ -265,10 +263,6 @@ h1.card-menu {
     margin: auto;
 }
 
-div.card-menu {
-    display: flex;
-}
-
 p.card-menu-icon {
     font-size: 15em;
     display: flex;
@@ -277,7 +271,7 @@ p.card-menu-icon {
 }
 
 .cards-menu-container {
-    position: fixed;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,6 +284,7 @@ p.card-menu-icon {
     color: black;
     text-align: center;
     width: 100vw;
+    height: 70px;
     margin-top: 100px;
     font-size: 4em;
 }

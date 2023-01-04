@@ -1,33 +1,45 @@
+import { useState, useEffect } from "react";
 import TopBar from "../components/topBar";
+import DefineCard from "../components/createDeckMenu/defineCard";
+import CardList from "../components/createDeckMenu/cardList";
+import DefineDeckName from "../components/createDeckMenu/defineDeckName";
+
+export interface Card {
+    front: string;
+    back: string;
+}
 
 export default function CreateDeck() {
+    const [deckName, setDeckName] = useState("");
+    const [currentCard, setCurrentCard] = useState<Card>({
+        front: "",
+        back: "",
+    });
+    const [cardArray, setCardArray] = useState([] as Card[]);
+
+    // useEffect on currentcard which adds it to the cardarray. Input errors handled in defineCard.tsx
+    useEffect(() => {
+        let cards = cardArray;
+        cards.push(currentCard);
+        setCardArray(cards);
+    }, [currentCard]);
 
     return (
-        <div style={{ position: "absolute", display: "flex", top: "0px" }}>
+        <div
+            style={{
+                position: "absolute",
+                display: "flex",
+                top: "0px",
+                width: "100vw",
+                height: "100vh",
+                flexDirection: "column",
+            }}
+        >
             <h1 className="page-heading">Create a deck</h1>
-            <div className="login-popup">
-                <div className="popup" style={{ padding: "10px" }}>
-                    <form>
-                        <label style={{ color: "black" }}>
-                            Deck name: <br />
-                            <input
-                                type="text"
-                                className="form-style"
-                                style={{ width: "90%" }}
-                            />
-                        </label>
-                        <input
-                            type="submit"
-                            value={"Create"}
-                            className="form-style login"
-                            style={{
-                                marginRight: "none",
-                                marginTop: "10px",
-                                marginLeft: "auto",
-                            }}
-                        />
-                    </form>
-                </div>
+            <DefineDeckName setDeckName={setDeckName} />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <CardList cardArray={cardArray} setCardArray={setCardArray} />
+                <DefineCard setCurrentCard={setCurrentCard} />
             </div>
             <TopBar />
         </div>
