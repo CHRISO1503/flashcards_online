@@ -20,7 +20,9 @@ export default function DefineCard({
     return (
         <div className="general-popup">
             <div className="popup" style={{ padding: "10px", margin: "auto" }}>
-                <h2 style={{ marginBottom: "40px" }}>Add a card</h2>
+                <h2 style={{ marginBottom: "40px", textAlign: "center" }}>
+                    Add a card
+                </h2>
                 <form onSubmit={(e) => addCard(e, frontOfCard, backOfCard)}>
                     <CardInput
                         value={frontOfCard}
@@ -38,7 +40,7 @@ export default function DefineCard({
                         className="form-style login"
                         style={{
                             marginRight: "none",
-                            marginTop: "50px",
+                            marginTop: "20px",
                             marginLeft: "auto",
                         }}
                     />

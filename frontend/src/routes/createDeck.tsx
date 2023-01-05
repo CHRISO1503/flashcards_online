@@ -17,11 +17,13 @@ export default function CreateDeck() {
     });
     const [cardArray, setCardArray] = useState([] as Card[]);
 
-    // useEffect on currentcard which adds it to the cardarray. Input errors handled in defineCard.tsx
     useEffect(() => {
+        if (currentCard.front == "" && currentCard.back == "") {
+            return;
+        }
         let cards = cardArray;
         cards.push(currentCard);
-        setCardArray(cards);
+        setCardArray(cards.slice());
     }, [currentCard]);
 
     return (

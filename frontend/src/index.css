@@ -88,7 +88,6 @@ div.popup {
     border: 5px solid var(--theme-color);
     background-color: white;
     display: flex;
-    justify-content: center;
     width: 400px;
     height: 350px;
     border-radius: 10px;
@@ -287,4 +286,24 @@ p.card-menu-icon {
     height: 70px;
     margin-top: 100px;
     font-size: 4em;
+}
+
+table.deckTable {
+    table-layout: fixed;
+}
+
+table.deckTable div {
+    overflow: hidden;
+    width: 120px;
+}
+
+input[type="button"].remove {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+input[type="button"]:hover.remove {
+    background-color: var(--theme-color);
+    color: white;
 }
