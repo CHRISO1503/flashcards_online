@@ -121,7 +121,6 @@ input[type="password"].form-style {
     color: black;
     padding: 7px;
 }
-
 input[type="text"]:focus.form-style,
 input[type="password"]:focus.form-style {
     border: 2px solid rgb(163, 163, 163);
@@ -141,21 +140,17 @@ input[type="submit"].form-style {
     justify-content: center;
     cursor: pointer;
 }
-
 input[type="submit"]:hover.form-style.login {
     background-color: var(--theme-color-highlight);
 }
-
 input[type="submit"]:hover.form-style.sign-up {
     background-color: var(--theme-color-highlight);
     color: white;
     border: none;
 }
-
 input[type="submit"].form-style.login {
     background-color: var(--theme-color);
 }
-
 input[type="submit"].form-style.sign-up {
     background-color: white;
     color: var(--theme-color);
@@ -189,6 +184,10 @@ h1.top-bar {
     margin: auto;
     position: fixed;
     margin-top: 4px;
+    user-select: none;
+}
+h1:hover.top-bar {
+    cursor: pointer;
 }
 
 button.top-bar {
@@ -205,6 +204,12 @@ button.top-bar {
     position: absolute;
     right: 0;
 }
+button:focus.top-bar {
+    outline: none;
+}
+button:hover.top-bar {
+    background-color: var(--theme-color-highlight);
+}
 
 p.top-bar {
     display: flex;
@@ -217,14 +222,6 @@ p.top-bar {
     position: absolute;
     left: 0;
     margin-top: 12px;
-}
-
-button:focus.top-bar {
-    outline: none;
-}
-
-button:hover.top-bar {
-    background-color: var(--theme-color-highlight);
 }
 
 div.blur-content {
@@ -246,7 +243,6 @@ button.card-menu.no-hover {
     margin-left: 25px;
     user-select: none;
 }
-
 button:hover.card-menu {
     background-color: var(--theme-color);
     color: white;
@@ -302,8 +298,14 @@ input[type="button"].remove {
     color: black;
     border: none;
 }
-
 input[type="button"]:hover.remove {
     background-color: var(--theme-color);
     color: white;
+}
+
+button.create-deck {
+    background-color: var(--theme-color);
+    width: 400px;
+    margin: auto;
+    margin-top: 10px;
 }

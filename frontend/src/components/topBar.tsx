@@ -34,7 +34,9 @@ export default function TopBar({
             >
                 Logged in as {currentUser}
             </p>
-            <h1 className="top-bar">Flashcards Online</h1>
+            <h1 className="top-bar" onClick={() => navigate("/")}>
+                Flashcards Online
+            </h1>
             <button
                 className="top-bar"
                 onClick={() => {

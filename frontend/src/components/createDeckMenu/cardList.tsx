@@ -7,6 +7,12 @@ export default function CardList({
     cardArray: Card[];
     setCardArray: (value: Card[]) => void;
 }) {
+    function removeCard(i: number) {
+        let cards = cardArray;
+        cards.splice(i, 1);
+        setCardArray(cards.slice());
+    }
+
     return (
         <div className="general-popup">
             <div
@@ -29,7 +35,7 @@ export default function CardList({
                                 <div>Back</div>
                             </th>
                             <th>
-                                <div style={{ width: "35px" }}>X</div>
+                                <div style={{ width: "35px" }}></div>
                             </th>
                         </tr>
                     </thead>
@@ -54,9 +60,11 @@ export default function CardList({
                                 </th>
                                 <th>
                                     <input
+                                        key={i}
                                         className="remove"
                                         type="button"
                                         value="X"
+                                        onClick={() => removeCard(i)}
                                     />
                                 </th>
                             </tr>

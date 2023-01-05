@@ -26,6 +26,8 @@ export default function CreateDeck() {
         setCardArray(cards.slice());
     }, [currentCard]);
 
+    function createDeck() {}
+
     return (
         <div
             style={{
@@ -43,6 +45,9 @@ export default function CreateDeck() {
                 <CardList cardArray={cardArray} setCardArray={setCardArray} />
                 <DefineCard setCurrentCard={setCurrentCard} />
             </div>
+            <button className="create-deck" onClick={createDeck}>
+                Create deck
+            </button>
             <TopBar />
         </div>
     );
