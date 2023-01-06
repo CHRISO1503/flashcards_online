@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userService from "../service/user";
+import deckService from "../service/deck";
 
 const router = Router();
 
@@ -34,6 +35,12 @@ router.post("/api/login", async (req, res) => {
 
 router.post("/api/create-deck", async (req, res) => {
     try {
+        let response = await deckService.createDeck(
+            req.body.user,
+            req.body.deckName,
+            req.body.cards
+        );
+        res.status(response.code).json(response.message);
     } catch (err) {
         console.log(err);
         res.status(500).json("Something went wrong");

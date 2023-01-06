@@ -7,7 +7,7 @@ export class Card {
     id: number;
 
     @Column()
-    cardId: number;
+    cardNumber: number;
 
     @Column()
     front: string;

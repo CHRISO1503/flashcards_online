@@ -16,6 +16,7 @@ export default function CreateDeck() {
         back: "",
     });
     const [cardArray, setCardArray] = useState([] as Card[]);
+    const [userErrorMessage, setUserErrorMessage] = useState("");
 
     useEffect(() => {
         if (currentCard.front == "" && currentCard.back == "") {
@@ -26,7 +27,31 @@ export default function CreateDeck() {
         setCardArray(cards.slice());
     }, [currentCard]);
 
-    function createDeck() {}
+    async function createDeck() {
+        if (deckName == "") {
+            setUserErrorMessage(
+                "Your deck needs a name before it can be created!"
+            );
+            return;
+        }
+        let user = localStorage.getItem("currentUser");
+        await fetch("/api/create-deck", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                user: user,
+                deckName: deckName,
+                cards: cardArray,
+            }),
+        })
+            .then((response) => {
+                if (response.status == 200) {
+                    setUserErrorMessage("Deck created!");
+                }
+                return response.json();
+            })
+            .then((data) => console.log(data));
+    }
 
     return (
         <div
@@ -48,6 +73,12 @@ export default function CreateDeck() {
             <button className="create-deck" onClick={createDeck}>
                 Create deck
             </button>
+            <p
+                className="page-heading"
+                style={{ fontSize: "1em", margin: "none" }}
+            >
+                {userErrorMessage}
+            </p>
             <TopBar />
         </div>
     );
