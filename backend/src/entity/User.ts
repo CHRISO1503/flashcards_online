@@ -12,6 +12,6 @@ export class User {
     @Column()
     password: string;
 
-    @OneToMany(() => Deck, (deck) => deck.user)
+    @OneToMany(() => Deck, (deck) => deck.user, { cascade: true })
     decks: Deck[];
 }

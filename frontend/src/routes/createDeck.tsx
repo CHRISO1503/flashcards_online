@@ -3,6 +3,7 @@ import TopBar from "../components/topBar";
 import DefineCard from "../components/createDeckMenu/defineCard";
 import CardList from "../components/createDeckMenu/cardList";
 import DefineDeckName from "../components/createDeckMenu/defineDeckName";
+import { useLocation } from "react-router-dom";
 
 export interface Card {
     front: string;
@@ -17,6 +18,8 @@ export default function CreateDeck() {
     });
     const [cardArray, setCardArray] = useState([] as Card[]);
     const [userErrorMessage, setUserErrorMessage] = useState("");
+    const [editingDeck, setEditingDeck] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         if (currentCard.front == "" && currentCard.back == "") {
@@ -27,14 +30,38 @@ export default function CreateDeck() {
         setCardArray(cards.slice());
     }, [currentCard]);
 
+    useEffect(() => {
+        if (location.state !== null) {
+            let cards = [] as Card[];
+            for (const card of location.state.deck.cards) {
+                cards.push({
+                    front: card.front,
+                    back: card.back,
+                });
+            }
+            setCardArray(cards.slice());
+            setEditingDeck(true);
+        }
+    }, []);
+
     async function createDeck() {
-        if (deckName == "") {
+        if (deckName == "" && !editingDeck) {
             setUserErrorMessage(
                 "Your deck needs a name before it can be created!"
             );
             return;
         }
-        let user = localStorage.getItem("currentUser");
+        const user = localStorage.getItem("currentUser");
+        console.log(
+            JSON.stringify({
+                user: user,
+                deckName: deckName,
+                cards: cardArray,
+                prevDeckName: editingDeck
+                    ? location.state.deck.deck.deckName
+                    : null,
+            })
+        );
         await fetch("/api/create-deck", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -42,6 +69,9 @@ export default function CreateDeck() {
                 user: user,
                 deckName: deckName,
                 cards: cardArray,
+                prevDeckName: editingDeck
+                    ? location.state.deck.deck.deckName
+                    : null,
             }),
         })
             .then((response) => {
@@ -50,7 +80,7 @@ export default function CreateDeck() {
                 }
                 return response.json();
             })
-            .then((data) => console.log(data));
+            .then((data) => {});
     }
 
     return (
@@ -64,14 +94,27 @@ export default function CreateDeck() {
                 flexDirection: "column",
             }}
         >
-            <h1 className="page-heading">Create a deck</h1>
-            <DefineDeckName setDeckName={setDeckName} />
+            <h1 className="page-heading">
+                {editingDeck ? "Edit deck" : "Create a deck"}
+            </h1>
+            {editingDeck ? (
+                <DefineDeckName
+                    placeholder={location.state.deck.deck.deckName}
+                    setDeckName={setDeckName}
+                />
+            ) : (
+                <DefineDeckName
+                    placeholder="Name your deck here"
+                    setDeckName={setDeckName}
+                />
+            )}
+
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <CardList cardArray={cardArray} setCardArray={setCardArray} />
                 <DefineCard setCurrentCard={setCurrentCard} />
             </div>
             <button className="create-deck" onClick={createDeck}>
-                Create deck
+                {editingDeck ? "Save changes" : "Create deck"}
             </button>
             <p
                 className="page-heading"

@@ -7,6 +7,7 @@ import { migrationName1671806248117 } from "../database/migrations/1671806248117
 import { addPasswords1672332371596 } from "../database/migrations/1672332371596-addPasswords";
 import { migrations1672949798582 } from "../database/migrations/1672949798582-migrations";
 import { migrations1673026279026 } from "../database/migrations/1673026279026-migrations";
+import { migrations1673109817825 } from "../database/migrations/1673109817825-migrations";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -23,6 +24,7 @@ export const AppDataSource = new DataSource({
         addPasswords1672332371596,
         migrations1672949798582,
         migrations1673026279026,
+        migrations1673109817825,
     ],
     subscribers: [],
 });

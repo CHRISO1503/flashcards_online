@@ -1,3 +1,3 @@
-export default function CreateDeck() {
+export default function OpenDeck() {
     return <></>;
 }

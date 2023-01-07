@@ -1,6 +1,8 @@
 export default function SetDeckName({
+    placeholder,
     setDeckName,
 }: {
+    placeholder?: string;
     setDeckName: (value: string) => void;
 }) {
     return (
@@ -27,6 +29,7 @@ export default function SetDeckName({
                         <input
                             type="text"
                             className="form-style"
+                            placeholder={placeholder}
                             style={{ width: "90%", marginTop: "10px" }}
                             onChange={(e) => setDeckName(e.target.value)}
                         />

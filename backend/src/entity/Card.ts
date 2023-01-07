@@ -15,6 +15,6 @@ export class Card {
     @Column()
     back: string;
 
-    @ManyToOne(() => Deck, (deck) => deck.cards)
+    @ManyToOne(() => Deck, (deck) => deck.cards, { onDelete: "CASCADE" })
     deck: Deck;
 }

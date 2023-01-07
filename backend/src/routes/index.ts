@@ -38,9 +38,20 @@ router.post("/api/create-deck", async (req, res) => {
         let response = await deckService.createDeck(
             req.body.user,
             req.body.deckName,
-            req.body.cards
+            req.body.cards,
+            req.body.prevDeckName
         );
         res.status(response.code).json(response.message);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("Something went wrong");
+    }
+});
+
+router.post("/api/get-user-decks", async (req, res) => {
+    try {
+        let response = await deckService.getUserDecks(req.body.username);
+        res.status(response.code).json(response.response);
     } catch (err) {
         console.log(err);
         res.status(500).json("Something went wrong");

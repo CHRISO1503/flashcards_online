@@ -5,13 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/home";
 import CreateDeck from "./routes/createDeck";
 import OpenDeck from "./routes/openDeck";
-import EditDecks from "./routes/editDecks";
+import ManageDecks from "./routes/manageDecks";
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
     { path: "/create-deck", element: <CreateDeck /> },
     { path: "/open-deck", element: <OpenDeck /> },
-    { path: "/manage-decks", element: <EditDecks /> },
+    { path: "/manage-decks", element: <ManageDecks /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

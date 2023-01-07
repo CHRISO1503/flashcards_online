@@ -1,9 +1,11 @@
 import { Card } from "../../routes/createDeck";
 
 export default function CardList({
+    height,
     cardArray,
     setCardArray,
 }: {
+    height?: number;
     cardArray: Card[];
     setCardArray: (value: Card[]) => void;
 }) {
@@ -17,7 +19,12 @@ export default function CardList({
         <div className="general-popup">
             <div
                 className="popup"
-                style={{ padding: "10px", margin: "auto", overflowY: "scroll" }}
+                style={{
+                    padding: "10px",
+                    margin: "auto",
+                    overflowY: "scroll",
+                    height: height,
+                }}
             >
                 <h2 style={{ marginBottom: "40px", textAlign: "center" }}>
                     Deck preview

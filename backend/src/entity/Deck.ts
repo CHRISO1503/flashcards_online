@@ -16,9 +16,9 @@ export class Deck {
     @Column()
     deckName: string;
 
-    @ManyToOne(() => User, (user) => user.decks)
+    @ManyToOne(() => User, (user) => user.decks, { onDelete: "CASCADE" })
     user: User;
 
-    @OneToMany(() => Card, (card) => card.deck)
+    @OneToMany(() => Card, (card) => card.deck, { cascade: true })
     cards: Card[];
 }
