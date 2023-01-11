@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react";
 import { DBCard, DBDeck } from "../../routes/manageDecks";
+import CheckAnswer from "./checkAnswer";
 import CurrentCard from "./currentCard";
+import InputCorrect from "./inputCorrect";
 
 export default function ActiveFlashcards({
     deck,
+    setDeck,
 }: {
     deck: {
         deck: DBDeck;
         cards: DBCard[];
     };
+    setDeck: (value: { deck: DBDeck; cards: DBCard[] } | undefined) => void;
 }) {
-    const [cardStack, setCardStack] = useState<DBCard[]>();
-    const [completedCards, setCompletedCards] = useState<DBCard[]>();
+    const [cardStack, setCardStack] = useState<DBCard[]>([]);
+    const [completedCards, setCompletedCards] = useState<DBCard[]>([]);
     const [frontBack, setFrontBack] = useState(false);
 
     useEffect(() => {
         let cardStack = deck.cards;
         cardStack = shuffleCards(cardStack);
-        setCardStack(cardStack);
+        setCardStack(cardStack.slice());
     }, []);
 
     function shuffleCards(array: DBCard[]) {
@@ -39,13 +43,50 @@ export default function ActiveFlashcards({
         <>
             <h1 className="page-heading">{deck.deck.deckName}</h1>
             <div>
-                {cardStack ? (
+                {cardStack.length > 0 ? (
                     <CurrentCard card={cardStack[0]} frontBack={frontBack} />
                 ) : (
-                    <></>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <p style={{ color: "black" }}>
+                            Congratulations, you have completed the deck!
+                        </p>
+                    </div>
                 )}
             </div>
-            <button onClick={() => setFrontBack(!frontBack)}>Check</button>
+            {cardStack.length > 0 ? (
+                <>
+                    <InputCorrect
+                        frontBack={frontBack}
+                        setFrontBack={setFrontBack}
+                        cardStack={cardStack}
+                        setCardStack={setCardStack}
+                        completedCards={completedCards}
+                        setCompletedCards={setCompletedCards}
+                    />
+                    <CheckAnswer
+                        frontBack={frontBack}
+                        setFrontBack={setFrontBack}
+                    />
+                </>
+            ) : (
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "100px",
+                    }}
+                >
+                    <input
+                        type="button"
+                        className="card-active"
+                        style={{ width: "150px" }}
+                        value="Return to decks"
+                        onClick={() => {
+                            setDeck(undefined);
+                        }}
+                    />
+                </div>
+            )}
         </>
     );
 }

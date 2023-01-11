@@ -19,12 +19,6 @@ export default function OpenDeck() {
         getDecks();
     }, []);
 
-    useEffect(() => {
-        activeDeck
-            ? console.log(activeDeck.deck.deckName)
-            : console.log(activeDeck);
-    }, [activeDeck]);
-
     async function getDecks() {
         const username = localStorage.getItem("currentUser");
         await fetch("/api/get-user-decks", {
@@ -53,7 +47,7 @@ export default function OpenDeck() {
         >
             {activeDeck ? <></> : <h1 className="page-heading">Choose deck</h1>}
             {activeDeck ? (
-                <ActiveFlashcards deck={activeDeck} />
+                <ActiveFlashcards deck={activeDeck} setDeck={setActiveDeck} />
             ) : userDecks.length > 0 ? (
                 userDecks.map((deck, i) => (
                     <div

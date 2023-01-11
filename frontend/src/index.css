@@ -310,3 +310,31 @@ button.create-deck {
     margin-bottom: 20px;
     margin-top: 10px;
 }
+
+input[type="button"].card-active {
+    background-color: var(--theme-color);
+    color: white;
+    border: 2px solid var(--theme-color);
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+input[type="button"]:hover.card-active {
+    background-color: var(--theme-color-highlight);
+    cursor: pointer;
+}
+
+input[type="button"].card-active.light {
+    background-color: white;
+    color: var(--theme-color);
+}
+
+input[type="button"]:hover.card-active.light {
+    background-color: var(--theme-color-highlight);
+    color: white;
+    cursor: pointer;
+}

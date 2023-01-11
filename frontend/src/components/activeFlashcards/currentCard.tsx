@@ -4,7 +4,7 @@ export default function CurrentCard({
     card,
     frontBack,
 }: {
-    card: DBCard;
+    card?: DBCard;
     frontBack: boolean;
 }) {
     return (
@@ -14,11 +14,18 @@ export default function CurrentCard({
                 style={{
                     padding: "10px",
                     margin: "auto",
-                    marginTop: "150px",
+                    marginTop: "100px",
                     height: "200px",
+                    textAlign: "center",
+                    fontSize: "2.5em",
+                    lineHeight: "1em",
+                    justifyContent: "center",
+                    overflow: "auto",
                 }}
             >
-                <p>{frontBack ? card.back : card.front}</p>
+                <div style={{ maxHeight: "200px" }}>
+                    {card ? (frontBack ? card.back : card.front) : ""}
+                </div>
             </div>
         </div>
     );
