@@ -1,7 +1,7 @@
 import * as express from "express";
-import * as cors from "cors";
 import router from "./routes";
 import { Request } from "express";
+import cors = require("cors");
 
 const app = express();
 
