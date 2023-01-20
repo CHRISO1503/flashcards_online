@@ -65,7 +65,7 @@ export default function LoginPopup({
                 })
                 .catch((error) => console.error(error));
         } else {
-            await fetch("/api/register", {
+            await fetch(manualProxy.concat("/api/register"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
