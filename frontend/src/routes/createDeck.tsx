@@ -4,6 +4,7 @@ import DefineCard from "../components/createDeckMenu/defineCard";
 import CardList from "../components/createDeckMenu/cardList";
 import DefineDeckName from "../components/createDeckMenu/defineDeckName";
 import { useLocation } from "react-router-dom";
+import { manualProxy } from "../main";
 
 export interface Card {
     front: string;
@@ -62,7 +63,7 @@ export default function CreateDeck() {
                     : null,
             })
         );
-        await fetch("/api/create-deck", {
+        await fetch(manualProxy.concat("/api/create-deck"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

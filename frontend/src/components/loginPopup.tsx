@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import "../index.css";
+import { manualProxy } from "../main";
 
 export default function LoginPopup({
     setLoginState,
@@ -35,7 +36,7 @@ export default function LoginPopup({
         }
         if (isRegistered) {
             let status200 = false;
-            await fetch("/api/login", {
+            await fetch(manualProxy.concat("/api/login"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

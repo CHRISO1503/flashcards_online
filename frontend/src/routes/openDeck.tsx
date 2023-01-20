@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ActiveFlashcards from "../components/activeFlashcards/activeFlashcards";
 import DeckToEdit from "../components/manageDecksMenu/deckToEdit";
 import TopBar from "../components/topBar";
+import { manualProxy } from "../main";
 import { DBDeck, DBCard } from "./manageDecks";
 
 export default function OpenDeck() {
@@ -21,7 +22,7 @@ export default function OpenDeck() {
 
     async function getDecks() {
         const username = localStorage.getItem("currentUser");
-        await fetch("/api/get-user-decks", {
+        await fetch(manualProxy.concat("/api/get-user-decks"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

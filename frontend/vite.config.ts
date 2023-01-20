@@ -7,8 +7,6 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": "https://flashcards-online-backend.onrender.com",
-            "https://flashcards-online-frontend.onrender.com":
-                "https://flashcards-online-backend.onrender.com",
         },
     },
 });

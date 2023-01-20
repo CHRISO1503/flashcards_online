@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeckToEdit from "../components/manageDecksMenu/deckToEdit";
 import TopBar from "../components/topBar";
+import { manualProxy } from "../main";
 
 export interface DBCard {
     id: number;
@@ -26,7 +27,7 @@ export default function ManageDecks() {
 
     async function getDecks() {
         const username = localStorage.getItem("currentUser");
-        await fetch("/api/get-user-decks", {
+        await fetch(manualProxy.concat("/api/get-user-decks"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
